@@ -1,0 +1,13 @@
+group 'com.kute'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'org.asciidoctor.convert'
+
+asciidoctor {
+    sources {
+        include 'gradle-docs.adoc'
+    }
+}
+
+build.dependsOn 'asciidoctor'
+

@@ -1,0 +1,6 @@
+rootProject.name = 'puregradletest'
+
+include 'gradle-web'
+include 'gradle-common'
+include 'gradle-document'
+

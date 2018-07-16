@@ -1,0 +1,4 @@
+```
+cd puregradletest
+./gradlew :gradle-document:asciidoctor
+```

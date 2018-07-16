@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'com.kute'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+
+// 因为是 java-application，需要指明 entry point
+mainClassName = "com.kute.ApplicationStarter"
+
+dependencies {
+    compile project(":gradle-common")
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

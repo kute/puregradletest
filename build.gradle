@@ -1,0 +1,68 @@
+buildscript {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+    }
+    dependencies {
+
+    }
+}
+
+plugins {
+    id 'com.gradle.build-scan' version '1.15.1'
+    id 'base'
+    id 'org.asciidoctor.convert' version '1.5.6' apply false
+}
+
+group 'com.kute'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+// 添加并同意  构建审视  功能：https://gradle.com/scans/help/plugin-terms-of-service
+buildScan {
+    termsOfServiceUrl = 'https://gradle.com/terms-of-service'
+    termsOfServiceAgree = 'yes'
+}
+
+task copy(type: Copy, group: group, description: "test copy task") {
+    from "src/main/resources"
+    into "src/test/resources"
+}
+
+task zip(type: Zip, group: group, description: "test zip in base plugin task") {
+    from "src/main/resources"
+    setArchiveName "resource-1.0.zip"
+}
+
+configure(subprojects.findAll { it.name == 'greeter' || it.name == 'greeting-library' }) {
+
+    apply plugin: 'groovy'
+
+    dependencies {
+        testCompile 'org.spockframework:spock-core:1.0-groovy-2.4', {
+            exclude module: 'groovy-all'
+        }
+    }
+}
+
+allprojects {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        mavenCentral()
+        jcenter()
+    }
+}
+
+subprojects {
+    version = "1.0-SNAPSHOT"
+}
