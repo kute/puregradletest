@@ -15,3 +15,13 @@ cache:
 
 script:
   - ./gradlew build --scan -s
+
+branches:
+  only:
+  - master
+notifications:
+  email:
+      recipients:
+        - kutekute00@gmail.com
+      on_success: never
+      on_failure: always

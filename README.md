@@ -1,1 +1,1 @@
-# puregradletest
+# puregradletest [![Build Status](https://www.travis-ci.org/kute/puregradletest.svg?branch=master)](https://www.travis-ci.org/kute/puregradletest)  [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/kuteforwhy/forwhy)
