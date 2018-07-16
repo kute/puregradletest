@@ -40,6 +40,9 @@ public class HelloServletFunctionalTest {
         driver.findElement(By.id("say-hello-text-input")).sendKeys("Dolly");
         driver.findElement(By.id("say-hello-button")).click();
 
+        System.out.println("kute=======");
+        System.out.println(driver.getTitle());
+        System.out.println(driver.findElement(By.tagName("h2")).getText());
         assertEquals("Hello Page", driver.getTitle());
         assertEquals("Hello, Dolly!", driver.findElement(By.tagName("h2")).getText());
     }

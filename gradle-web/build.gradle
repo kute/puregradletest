@@ -29,5 +29,5 @@ dependencies {
 }
 
 gretty {
-    integrationTestTask = 'test'
+    integrationTestTask = 'build'
 }
