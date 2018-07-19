@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'war'
+    id 'application'
+    // gretty插件，支持部署在jetty上，执行 gradlew appRun --console=plain 部署应用
+    id 'org.gretty' version '2.2.0'
+}
+
+group 'com.kute'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+
+// 因为是 java-application，需要指明 entry point
+mainClassName = "com.kute.ApplicationStarter"
+
+// DependencyHandler:https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.dsl.DependencyHandler.html
+dependencies {
+    implementation project(":gradle-common")
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    // servlet 3.0 之后 就不需要web.xml，直接用 annotation 实现
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+    testImplementation 'org.mockito:mockito-core:2.7.19'
+    // 提供 浏览器驱动
+    testImplementation ('io.github.bonigarcia:webdrivermanager:1.6.1') {
+        // 排除 依赖
+        exclude group: 'com.google.guava', module: 'guava'
+//        exclude group: 'com.google.guava' // 只指定 group排除
+//        exclude module: 'guava' // 只指定 module 排除
+
+        // 排除所有的传递依赖
+        transitive = false
+
+        // 为避免依赖冲突，强制使用此版本的依赖
+        force = true
+    }
+    testImplementation 'org.seleniumhq.selenium:selenium-java:3.3.1'
+}
+
+gretty {
+    integrationTestTask = 'build'
+}

@@ -4,3 +4,12 @@ include 'gradle-web'
 include 'gradle-common'
 include 'gradle-document'
 
+dependencyManagement {
+
+}
+
+// 配置 子项目的构建文件
+rootProject.children.each {project ->
+    project.buildFileName = "${project.name}.gradle"
+}
+

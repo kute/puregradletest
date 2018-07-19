@@ -22,9 +22,15 @@ apply plugin: 'war'
 
 sourceCompatibility = 1.8
 
-
+// 依赖
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    // 添加 文件中的依赖
+    compile files("libs/joda-time-2.9.9.jar")
+
+    // 将文件中全部依赖加入compile
+    compile fileTree('libs')
 }
 
 // 添加并同意  构建审视  功能：https://gradle.com/scans/help/plugin-terms-of-service
